@@ -1,0 +1,64 @@
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 5rem;
+}
+
+.box {
+  height: 10rem;
+  width: 10rem;
+  border: 1px solid black;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+// @use "sass:map";
+
+// $light-theme: (
+//   background-color: #ffffff,
+//   text-color: #000000,
+//   font-family: "Arial, sans-serif",
+//   border-radius: 5px,
+//   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1),
+// );
+
+// $dark-theme: (
+//   background-color: #333333,
+//   text-color: #ffffff,
+//   font-family: "Courier New, monospace",
+//   border-radius: 10px,
+//   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5),
+// );
+
+// @mixin apply-theme($theme) {
+//   background-color: map.get($theme, background-color);
+//   color: map.get($theme, text-color);
+//   font-family: map.get($theme, font-family);
+//   border-radius: map.get($theme, border-radius);
+//   box-shadow: map.get($theme, box-shadow);
+// }
+
+// body {
+//   margin: 0;
+//   padding: 0;
+// }
+
+// .theme-light {
+//   .content {
+//     @include apply-theme($light-theme);
+//   }
+// }
+
+// .theme-dark {
+//   .content {
+//     @include apply-theme($dark-theme);
+//   }
+// }
