@@ -1,0 +1,30 @@
+@use "variables" as vars;
+
+@mixin apply-theme($theme) {
+  .box-1 {
+    background-color: vars.theme-color($theme, "base");
+    color: vars.theme-color($theme, "font-primary");
+  }
+  .box-2 {
+    background-color: vars.theme-color($theme, "important");
+    color: vars.theme-color($theme, "font-primary");
+  }
+  .box-3 {
+    background-color: vars.theme-color($theme, "warning");
+    color: vars.theme-color($theme, "font-primary");
+  }
+  .box-4 {
+    color: vars.theme-color($theme, "font-primary");
+    font-family: Arial, sans-serif;
+    p:first-child {
+      font-weight: bold;
+    }
+    p:last-child {
+      color: vars.theme-color($theme, "font-secondary");
+    }
+  }
+  .box-5 {
+    background-color: vars.theme-color($theme, "base");
+    box-shadow: 0px 4px 10px vars.theme-color($theme, "shadow");
+  }
+}

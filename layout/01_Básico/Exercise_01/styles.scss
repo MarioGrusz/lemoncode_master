@@ -1,0 +1,66 @@
+@use "sass:color";
+
+@function darken($color, $amount) {
+  @return color.mix(black, $color, $amount);
+}
+
+@function lighten($color, $amount) {
+  @return color.mix(white, $color, $amount);
+}
+
+@mixin generate-color-classes($container, $base-color) {
+  .container-#{$container} {
+    @for $i from 1 through 4 {
+      .darken-#{$i} {
+        background-color: darken($base-color, $i * 10%);
+      }
+    }
+
+    .base-color {
+      background-color: $base-color;
+    }
+
+    @for $i from 1 through 4 {
+      .lighten-#{$i} {
+        background-color: lighten($base-color, $i * 10%);
+      }
+    }
+  }
+}
+
+$base-color-1: #3498db;
+$base-color-2: #e74c3c;
+$base-color-3: #2ecc71;
+
+@include generate-color-classes(1, $base-color-1);
+@include generate-color-classes(2, $base-color-2);
+@include generate-color-classes(3, $base-color-3);
+
+.section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-1,
+.container-2,
+.container-3 {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  margin: 10px;
+}
+
+.box {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin: 5px 0;
+}
+
+.box:nth-child(5) {
+  height: 100px;
+}

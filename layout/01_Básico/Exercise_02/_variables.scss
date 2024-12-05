@@ -1,0 +1,24 @@
+@use "sass:map";
+
+$themes: (
+  "light": (
+    "base": #f0f0f0,
+    "important": #4a90e2,
+    "warning": #f5a623,
+    "font-primary": #333,
+    "font-secondary": #555,
+    "shadow": rgba(0, 0, 0, 0.2),
+  ),
+  "dark": (
+    "base": #333,
+    "important": #50e3c2,
+    "warning": #d0021b,
+    "font-primary": #fff,
+    "font-secondary": #ddd,
+    "shadow": rgba(0, 0, 0, 0.6),
+  ),
+);
+
+@function theme-color($theme, $key) {
+  @return map.get(map.get($themes, $theme), $key);
+}

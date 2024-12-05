@@ -1,0 +1,114 @@
+.container-1 .darken-1 {
+  background-color: rgb(46.8, 136.8, 197.1);
+}
+.container-1 .darken-2 {
+  background-color: rgb(41.6, 121.6, 175.2);
+}
+.container-1 .darken-3 {
+  background-color: rgb(36.4, 106.4, 153.3);
+}
+.container-1 .darken-4 {
+  background-color: rgb(31.2, 91.2, 131.4);
+}
+.container-1 .base-color {
+  background-color: #3498db;
+}
+.container-1 .lighten-1 {
+  background-color: rgb(72.3, 162.3, 222.6);
+}
+.container-1 .lighten-2 {
+  background-color: rgb(92.6, 172.6, 226.2);
+}
+.container-1 .lighten-3 {
+  background-color: rgb(112.9, 182.9, 229.8);
+}
+.container-1 .lighten-4 {
+  background-color: rgb(133.2, 193.2, 233.4);
+}
+
+.container-2 .darken-1 {
+  background-color: rgb(207.9, 68.4, 54);
+}
+.container-2 .darken-2 {
+  background-color: rgb(184.8, 60.8, 48);
+}
+.container-2 .darken-3 {
+  background-color: rgb(161.7, 53.2, 42);
+}
+.container-2 .darken-4 {
+  background-color: rgb(138.6, 45.6, 36);
+}
+.container-2 .base-color {
+  background-color: #e74c3c;
+}
+.container-2 .lighten-1 {
+  background-color: rgb(233.4, 93.9, 79.5);
+}
+.container-2 .lighten-2 {
+  background-color: rgb(235.8, 111.8, 99);
+}
+.container-2 .lighten-3 {
+  background-color: rgb(238.2, 129.7, 118.5);
+}
+.container-2 .lighten-4 {
+  background-color: rgb(240.6, 147.6, 138);
+}
+
+.container-3 .darken-1 {
+  background-color: rgb(41.4, 183.6, 101.7);
+}
+.container-3 .darken-2 {
+  background-color: rgb(36.8, 163.2, 90.4);
+}
+.container-3 .darken-3 {
+  background-color: rgb(32.2, 142.8, 79.1);
+}
+.container-3 .darken-4 {
+  background-color: rgb(27.6, 122.4, 67.8);
+}
+.container-3 .base-color {
+  background-color: #2ecc71;
+}
+.container-3 .lighten-1 {
+  background-color: rgb(66.9, 209.1, 127.2);
+}
+.container-3 .lighten-2 {
+  background-color: rgb(87.8, 214.2, 141.4);
+}
+.container-3 .lighten-3 {
+  background-color: rgb(108.7, 219.3, 155.6);
+}
+.container-3 .lighten-4 {
+  background-color: rgb(129.6, 224.4, 169.8);
+}
+
+.section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-1,
+.container-2,
+.container-3 {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  margin: 10px;
+}
+
+.box {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin: 5px 0;
+}
+
+.box:nth-child(5) {
+  height: 100px;
+}
+
+/*# sourceMappingURL=styles.css.map */

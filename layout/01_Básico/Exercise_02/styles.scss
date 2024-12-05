@@ -1,0 +1,22 @@
+@use "variables";
+@use "mixins" as *;
+
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+}
+
+.box {
+  padding: 2rem;
+}
+
+.light-theme {
+  @include apply-theme("light");
+}
+
+.dark-theme {
+  @include apply-theme("dark");
+}

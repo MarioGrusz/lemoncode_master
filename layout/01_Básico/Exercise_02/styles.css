@@ -1,0 +1,67 @@
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+}
+
+.box {
+  padding: 2rem;
+}
+
+.light-theme .box-1 {
+  background-color: #f0f0f0;
+  color: #333;
+}
+.light-theme .box-2 {
+  background-color: #4a90e2;
+  color: #333;
+}
+.light-theme .box-3 {
+  background-color: #f5a623;
+  color: #333;
+}
+.light-theme .box-4 {
+  color: #333;
+  font-family: Arial, sans-serif;
+}
+.light-theme .box-4 p:first-child {
+  font-weight: bold;
+}
+.light-theme .box-4 p:last-child {
+  color: #555;
+}
+.light-theme .box-5 {
+  background-color: #f0f0f0;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.dark-theme .box-1 {
+  background-color: #333;
+  color: #fff;
+}
+.dark-theme .box-2 {
+  background-color: #50e3c2;
+  color: #fff;
+}
+.dark-theme .box-3 {
+  background-color: #d0021b;
+  color: #fff;
+}
+.dark-theme .box-4 {
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+.dark-theme .box-4 p:first-child {
+  font-weight: bold;
+}
+.dark-theme .box-4 p:last-child {
+  color: #ddd;
+}
+.dark-theme .box-5 {
+  background-color: #333;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+/*# sourceMappingURL=styles.css.map */
