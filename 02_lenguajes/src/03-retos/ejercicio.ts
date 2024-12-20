@@ -1,11 +1,11 @@
-// console.log("************** CHALLENGES *********************");
-// console.log(
-//   "Use this folder 02 challenges to practice with challenge exercises"
-// );
-// console.log("You can add new files as long as they are imported from index.ts");
+console.log("************** CHALLENGES *********************");
+console.log(
+  "Use this folder 02 challenges to practice with challenge exercises"
+);
+console.log("You can add new files as long as they are imported from index.ts");
 
 console.log("CONSOLE TRACES");
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const showMessage = async ([time, message]) => {
   await delay(time);
@@ -17,7 +17,7 @@ const triggers = [
   async () => await showMessage([100, "second"]),
 ];
 
-const run = async (triggers) => {
+const run = async (triggers: (() => Promise<void>)[]) => {
   for (const t of triggers) {
     await t();
   }
@@ -28,7 +28,10 @@ run(triggers);
 
 console.log("DEEP_GET");
 
-const deepGet = (obj, ...keys) => {
+const deepGet = (
+  obj: { a: number; b: { c: any; d: { e: number; f: { g: string } } } },
+  ...keys: string[]
+) => {
   if (keys.length === 0) return obj;
   return keys.reduce((acc, key) => acc && acc[key], obj);
 };
@@ -57,24 +60,20 @@ console.log("DEEP_SET");
 
 const myObject_02 = {};
 
-function deepSet(value, obj, ...keys) {
+function deepSet(value: number, obj: {}, ...keys: string[]) {
   if (keys.length === 0) {
-    // If no keys are provided, do nothing
     return;
   }
 
   let current = obj;
-  const lastKey = keys.pop(); // Remove and keep the last key
+  const lastKey = keys.pop();
 
   for (const key of keys) {
-    // Ensure each level is an object
     if (typeof current[key] !== "object" || current[key] === null) {
       current[key] = {};
     }
     current = current[key];
   }
-
-  // Set the final value at the last key
   current[lastKey] = value;
 }
 
@@ -87,6 +86,28 @@ console.log(JSON.stringify(myObject_02)); // {a: 3}
 deepSet(4, myObject_02);
 console.log(JSON.stringify(myObject_02)); // Do nothing // {a: 3}
 
+console.log("FLATTEN ARRAY");
+
+function flattenArray<T>(array: T[]): T[] {
+  const output = [];
+
+  for (let i = 0; i < array.length; i++) {
+    const element = array[i];
+
+    if (Array.isArray(element)) {
+      const flattenSubarray = flattenArray(element);
+      output.push(...flattenSubarray);
+    } else {
+      output.push(element);
+    }
+  }
+
+  return output;
+}
+
+const sample = [1, [2, 3], [[4], [5, 6, [7, 8, [9]]]]];
+console.log(flattenArray(sample));
+
 console.log("MEMOIZE");
 
 const expensiveFunction = () => {
@@ -94,8 +115,8 @@ const expensiveFunction = () => {
   return 3.1415;
 };
 
-function memoize(fn) {
-  let cache;
+function memoize(fn: () => number) {
+  let cache: number | undefined;
 
   return function () {
     if (cache !== undefined) {
@@ -109,8 +130,8 @@ function memoize(fn) {
 
 console.log("MEMOIZE ONE LINER");
 
-function memoizeOneLine(fn) {
-  let cache;
+function memoizeOneLine(fn: () => number) {
+  let cache: number | undefined;
   return () => (cache !== undefined ? cache : (cache = fn()));
 }
 
@@ -121,20 +142,20 @@ console.log(memoized()); // 3.1415
 
 console.log("MEMOIZE WITH ARGUMENTS");
 
-let count = 0; // Comprobacion de nº de ejecuciones
+let count = 0;
 const repeatText = (repetitions: number, text: string): string => (
   count++, `${text} `.repeat(repetitions).trim()
 );
 
-function memoizeWithArguments(fn) {
-  const cache = {}; // Store results here
+function memoizeWithArguments(fn: (...args: any[]) => string) {
+  const cache = {};
 
-  return function (...args) {
-    const key = JSON.stringify(args); // Serialize arguments to create a unique key
+  return function (...args: any) {
+    const key = JSON.stringify(args);
     if (cache[key] !== undefined) {
-      return cache[key]; // Use the stored result
+      return cache[key];
     }
-    const result = fn(...args); // Calculate and store the result
+    const result = fn(...args);
     cache[key] = result;
     return result;
   };
@@ -148,25 +169,54 @@ console.log(memoizedGreet(1, "pam")); // pam
 console.log(memoizedGreet(3, "chun")); // chun chun chun
 console.log(count); // 2
 
-// function slowFunction(num) {
-//   console.log("Doing some hard work...");
-//   return num * num; // Imagine this takes a long time to calculate
-// }
+console.log("TREE");
 
-// // A memoized version of the function
-// function memoize(fn) {
-//   const cache = {}; // Store results here
-//   return function (num) {
-//     if (cache[num] !== undefined) {
-//       return cache[num]; // Use the stored result
-//     }
-//     const result = fn(num); // Calculate and store the result
-//     cache[num] = result;
-//     return result;
-//   };
-// }
+class TreeNode<T> {
+  value: T;
+  children: TreeNode<T>[];
 
-// const memoizedFunction = memoize(slowFunction);
+  constructor(value: T) {
+    this.value = value;
+    this.children = [];
+  }
 
-// console.log(memoizedFunction(5)); // Logs: "Doing some hard work..." then 25
-// console.log(memoizedFunction(5)); // Instantly returns 25 without logging again
+  addChild(child: TreeNode<T>) {
+    this.children.push(child);
+  }
+
+  removeChild(value: T) {
+    this.children = this.children.filter((child) => child.value !== value);
+  }
+}
+
+class Tree<T> {
+  root: TreeNode<T> | null;
+
+  constructor(value: T) {
+    this.root = new TreeNode(value);
+  }
+}
+
+const tree = new Tree<string>("root");
+const child1 = new TreeNode("child1");
+const child2 = new TreeNode("child2");
+const grandChild = new TreeNode("grandChild");
+
+console.log("UNDERSTANDING JS");
+
+console.log("----------------- 1");
+
+const x = NaN;
+console.log(x === x);
+
+console.log("----------------- 2");
+
+const isNaNValue = (v: any) => Number.isNaN(v);
+
+console.log(isNaNValue(NaN)); // true
+console.log(isNaNValue(42)); // false
+console.log(isNaNValue("hello")); // true
+
+console.log("----------------- 3");
+
+console.log(!isNaNValue(x) && x !== x); // true
