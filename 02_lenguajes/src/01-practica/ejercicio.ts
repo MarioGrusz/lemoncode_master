@@ -122,3 +122,41 @@ var clonedUser_02 = {
 console.log(isDeepEqual(user_02, clonedUser_02)); // true
 
 console.log("DICES");
+
+function diceGame() {
+  let firstDice: number | null;
+  let secondDice: number | null;
+
+  function play() {
+    firstDice = Math.floor(Math.random() * 6) + 1;
+    secondDice = Math.floor(Math.random() * 6) + 1;
+    console.log(`You rolled: ${firstDice} and ${secondDice}`);
+
+    if (firstDice === 6 && secondDice === 6) {
+      console.log("🎉 You rolled double 6! You win a prize!");
+    }
+  }
+
+  function printResult() {
+    if (firstDice === null || secondDice === null) {
+      console.log("You must roll the dice first!");
+    } else {
+      console.log(
+        `Current results: Dice 1: ${firstDice}, Dice 2: ${secondDice}`
+      );
+    }
+  }
+
+  function reset() {
+    firstDice = null;
+    secondDice = null;
+    console.log("The dice have been reset. Roll again!");
+  }
+
+  return [play, printResult, reset];
+}
+
+const [play, printResult, reset] = diceGame();
+play();
+printResult();
+reset();
