@@ -160,3 +160,214 @@ const [play, printResult, reset] = diceGame();
 play();
 printResult();
 reset();
+
+console.log("HOISTING");
+
+function fn() {
+  console.log(a); //declaration hoisted and initialized to undefined
+  console.log(g()); //declaration hoisted and initialized to undefined
+
+  var a = "good job!";
+  function g() {
+    return a;
+  }
+  console.log(a); //"good job"
+}
+
+fn();
+
+console.log("INCLUDES");
+
+function includes(array: number[], value: number) {
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === value) return i;
+  }
+  return false;
+}
+
+function includes_02(array: number[], value: number) {
+  return array.indexOf(value);
+}
+
+console.log(includes_02([1, 2, 3], 3)); // true
+console.log(includes([1, 2, 3], 0)); // false
+
+console.log("PRIMES");
+
+function showPrimes(from: number, to: number): void {
+  for (let i = from; i <= to; i++) {
+    if (isPrime(i)) {
+      console.log(i, "PRIME");
+    } else {
+      console.log(i, "NOT PRIME");
+    }
+  }
+}
+
+function isPrime(num: number): boolean {
+  if (num < 2) return false;
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) return false;
+  }
+  return true;
+}
+
+showPrimes(1, 100);
+
+console.log("REVERSE TEXT");
+
+function reverseText(text: string) {
+  return text.split(" ").reverse().join(" ");
+}
+
+console.log(reverseText("Uno dos tres"));
+
+console.log("SUBSET");
+
+function subsets(word: string) {
+  const output = [];
+  for (let i = 1; i < word.length; i++) {
+    const subset = word.slice(i);
+    output.push(subset);
+  }
+
+  return output;
+}
+
+console.log(subsets("message")); // ["essage", "ssage", "sage", "age", "ge", "e"]
+
+console.log("THIS");
+
+var surname = "Pérez";
+var person_02 = {
+  name: "Juan",
+  surname: "González",
+  wife: {
+    name: "Ana",
+    surname: "Jiménez",
+    getSurname: function () {
+      return this.surname;
+    },
+  },
+};
+
+console.log(person_02.wife.getSurname());
+//var surnameFunction = person_02.wife.getSurname; // no longer bound to the wife object TypeError
+var surnameFunction = person_02.wife.getSurname.bind(person_02); //first solution bind
+console.log(surnameFunction());
+console.log(surnameFunction.call(person_02)); //second solution passing an object person
+
+console.log("VALUES");
+
+function values(obj) {
+  const result = [];
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      result.push(obj[key]);
+    }
+  }
+  return result;
+}
+
+console.log(
+  values({ id: 31, duration: 310, name: "long video", format: "mp4" })
+); // [31, 310, "long video", "mp4"]
+
+// Ejemplo:
+function Person(name: string) {
+  this.name = name;
+}
+
+Person.prototype.walk = function () {
+  console.log("I'm walking");
+};
+
+var john = new Person("John");
+console.log(values(john)); // ["John"]; en vez de ["John"; function() { console.log("I'm walking"); }]
+
+console.log("ZIP");
+
+function zipObject(keys: string[], values: string[]) {
+  const result = {};
+  for (let i = 0; i < values.length; i++) {
+    result[keys[i]] = values[i];
+  }
+  return result;
+}
+
+console.log(
+  zipObject(["spanish", "english", "french"], ["hola", "hi", "salut"])
+);
+console.log(zipObject(["spanish", "english", "french"], ["hola"]));
+
+console.log("ZZCRYPT");
+
+var secret =
+  "': rg!qg yq,urae: ghsrf wuran shrerg jq,u'qf ra r' ,qaq' er g'q,o rg,fuwurae: m!hfua( t'usqfuq ,:apu(:m xv";
+
+var plain = "abcdefghijklmnopqrstuvwxyz:()!¡,'";
+var cipher = "qw,ert(yuio'pa:sdfg!hjklz¡xcv)bnm";
+
+function decrypt(secret: string) {
+  let decrypted = "";
+
+  for (let char of secret) {
+    let index = cipher.lastIndexOf(char);
+
+    if (index !== -1) {
+      decrypted += plain[index];
+    } else {
+      decrypted += char;
+    }
+  }
+
+  return decrypted;
+}
+
+console.log(decrypt(secret));
+
+console.log("FIBONACCI");
+
+const fib = (n: number) => {
+  if (n === 0) return 0;
+  if (n === 1) return 1;
+
+  return fib(n - 1) + fib(n - 2);
+};
+
+console.log(fib(3));
+
+console.log("PLAYERS ORDER");
+
+const getPlayersOrder = (players: string[], turns: number) => {
+  return [...players.slice(turns), ...players.slice(0, turns)];
+};
+
+const newOrderIn2Turns = getPlayersOrder(["Ana", "Juan", "Pablo", "Lucia"], 2);
+console.log(newOrderIn2Turns); // ["Pablo", "Lucia", "Ana", "Juan"]
+
+class Reminder {
+  text: string;
+
+  constructor(text: string) {
+    this.text = text;
+  }
+
+  remindMe(delay: number) {
+    setTimeout(() => {
+      console.log(`Your reminder after ${delay} seconds is: ${this.text}`);
+    }, delay * 1000);
+  }
+}
+
+const newReminder = new Reminder("something");
+newReminder.remindMe(1);
+
+console.log("SWAP");
+
+let aaa = "A";
+let bbb = "B";
+[aaa, bbb] = [bbb, aaa];
+
+// Implementation here, one line, one shot!
+console.log(aaa === "B" && bbb === "A" ? "You did it!" : "Keep trying!");
