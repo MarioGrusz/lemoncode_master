@@ -2,7 +2,8 @@ console.log("************** PRACTICE *********************");
 console.log("Use this folder 00 practice to practice with homework exercises");
 console.log("You can add new files as long as they are imported from index.ts");
 
-console.log("BIGGEST WORD");
+console.log("THE BIGGEST WORD");
+
 function biggestWord(phrase: string) {
   let longestWord = "";
   const stringArray = phrase.split(" ");
@@ -39,7 +40,7 @@ function getGradeDescription(grade: number) {
   if (grade >= 5) return "Suficiente";
   if (grade >= 4) return "Insuficiente";
   if (grade < 4) return "Muy deficiente";
-  return "Nota inválida"; // Handles cases where the input is not valid
+  return "Nota inválida";
 }
 
 function printAverage(classResults: Record<string, number>): string {
@@ -57,7 +58,7 @@ console.log(printAverage(eso2o));
 console.log("CHECK ARGUMENTS");
 
 function f(input: string | undefined | null) {
-  var result: string | undefined | null;
+  let result: string | undefined | null;
   return input === undefined ? "Unknown" : input === null ? "" : input;
 }
 
@@ -180,17 +181,18 @@ console.log("INCLUDES");
 
 function includes(array: number[], value: number) {
   for (let i = 0; i < array.length; i++) {
-    if (array[i] === value) return i;
+    if (array[i] === value) return true;
   }
   return false;
 }
 
 function includes_02(array: number[], value: number) {
-  return array.indexOf(value);
+  if (array.indexOf(value)) return true;
+  return false;
 }
 
-console.log(includes_02([1, 2, 3], 3)); // true
 console.log(includes([1, 2, 3], 0)); // false
+console.log(includes_02([1, 2, 3], 3)); // true
 
 console.log("PRIMES");
 
@@ -251,15 +253,15 @@ var person_02 = {
   },
 };
 
-console.log(person_02.wife.getSurname());
-//var surnameFunction = person_02.wife.getSurname; // no longer bound to the wife object TypeError
-var surnameFunction = person_02.wife.getSurname.bind(person_02); //first solution bind
-console.log(surnameFunction());
-console.log(surnameFunction.call(person_02)); //second solution passing an object person
+console.log(person_02.wife.getSurname()); // Jiménez
+var surnameFunction_01 = person_02.wife.getSurname; // no longer bound to the wife object TypeError (copying the function to a new variable)
+var surnameFunction_02 = person_02.wife.getSurname.bind(person_02); //first solution bind
+console.log(surnameFunction_02());
+console.log(surnameFunction_01.call(person_02)); //second solution passing an object person
 
 console.log("VALUES");
 
-function values(obj) {
+function values(obj: object) {
   const result = [];
   for (const key in obj) {
     if (obj.hasOwnProperty(key)) {
@@ -424,3 +426,24 @@ const summarizeClassRoom = (studentList: Student[]): StudentSummary[] => {
 };
 
 console.log(summarizeClassRoom(students));
+
+console.log("CURRING");
+
+const julia = { name: "Julia", surname: "Álvarez", age: 19 };
+
+function set(propertyName: string) {
+  return function <T>(obj: object, value: T) {
+    return {
+      ...obj,
+      [propertyName]: value,
+    };
+  };
+}
+
+const setName = set("name");
+const setSurname = set("surname");
+const setAge = set("age");
+
+console.log(setName(julia, "Ana")); // { name: 'Ana', surname: 'Álvarez', age: 19 };
+console.log(setSurname(julia, "González")); // { name: 'Julia', surname: 'González', age: 19 };
+console.log(setAge(julia, 25)); // { name: 'Julia', surname: 'Álvarez', age: 25 }
